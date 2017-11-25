@@ -98,16 +98,19 @@
     <Compile Include="ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\AMJ_AttrListFile.cs" />
-    <Compile Include="Data\AMJ_File.cs" />
-    <Compile Include="Data\AMJ_FilesAttrFile.cs" />
-    <Compile Include="Data\AMJ_Folder.cs" />
+    <Compile Include="Data\AmjAttribute.cs" />
+    <Compile Include="Data\AmjFolder.cs" />
+    <Compile Include="Data\AmjObject.cs" />
+    <Compile Include="Data\AmjFile.cs" />
+    <Compile Include="Data\RegularFile.cs" />
+    <Compile Include="Data\RegularFolder.cs" />
     <Compile Include="FileEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FileEditor.Designer.cs">
       <DependentUpon>FileEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="IconReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AttributeForm.resx">

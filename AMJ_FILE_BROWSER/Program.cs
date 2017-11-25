@@ -15,24 +15,19 @@ namespace AMJ_FILE_BROWSER
         [STAThread]
         static void Main(string[] args)
         {
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            folder = Path.Combine(folder, "AMJ_FILE_BROWSER");
+            Directory.CreateDirectory(folder);
+            SettingsFile = Path.Combine(folder, "amj.settings");
+
+            if (!File.Exists(SettingsFile))
+                File.WriteAllText(SettingsFile, "");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            Browser b = null;
-            
-            if (args.Count() > 0)
-            {
-                String sourcePath = args[0];
-                if (!Directory.Exists(sourcePath))
-                    MessageBox.Show("Source path you specified doesnt exist.");
-                else
-                    b = new Browser(sourcePath);
-            }
-
-            if (b == null) b = new Browser();
-            
-            Application.Run(b);
+            Application.Run(new Browser());
         }
+        public static String SettingsFile;
         
     }
 }

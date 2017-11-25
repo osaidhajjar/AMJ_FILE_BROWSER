@@ -14,8 +14,8 @@ namespace AMJ_FILE_BROWSER
 {
     public partial class ConfigForm : Form
     {
-        private AMJ_Folder folder;
-        public ConfigForm(AMJ_Folder folder)
+        private AmjFolder folder;
+        public ConfigForm(AmjFolder folder)
         {
             this.folder = folder;
             InitializeComponent();
@@ -28,49 +28,21 @@ namespace AMJ_FILE_BROWSER
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(txtFolder.Text))
-            {
-                MessageBox.Show("Source path you specified doesn't exist");
-                return;
-            }
-            //folder.setupFolder(txtFolder.Text);
-
             List<String> attrList = new List<string>();
             foreach (ListViewItem attrItem in lstAttr.Items)
                 if (attrItem.Text.Length > 0) attrList.Add(attrItem.Text);
 
-            this.folder.addAttributesList(attrList);
-            folder.setupFolder(txtFolder.Text);
+            this.folder.updateAttributes(attrList);
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtFolder.Text = this.folderBrowserDialog1.SelectedPath;
-                folder.setupFolder(txtFolder.Text);
-                populateFolderData();
-            }
-        }
-
-        private void txtFolder_Leave(object sender, EventArgs e)
-        {
-            if (txtFolder.Text .Length > 0 && Directory.Exists(this.txtFolder.Text))
-            {
-                folder.setupFolder(txtFolder.Text);
-                populateFolderData();
-            }
         }
 
         private void populateFolderData()
         {
             lstAttr.Items.Clear();
-            if (folder.folderPath.Length > 0)
-                foreach (String attr in this.folder.getAttributes())
-                    lstAttr.Items.Add(attr);
-            txtFolder.Text = this.folder.folderPath;
+            foreach (String attr in this.folder.attributesList)
+                lstAttr.Items.Add(attr);
+            txtName.Text = this.folder.name;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
